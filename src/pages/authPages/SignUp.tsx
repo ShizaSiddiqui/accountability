@@ -11,8 +11,6 @@ interface SignUpFormProps {
     dobMonth: string;
     dobDay: string;
     dobYear: string;
-    password: string;
-    securityText: string;
   }) => void;
 }
 
@@ -24,8 +22,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
   const [dobMonth, setDobMonth] = useState("");
   const [dobDay, setDobDay] = useState("");
   const [dobYear, setDobYear] = useState("");
-  const [password, setPassword] = useState("");
-  const [securityText, setSecurityText] = useState("");
   const [usernameError, setUsernameError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
   const [companyError, setCompanyError] = useState<string | null>(null);
@@ -109,8 +105,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
         dobMonth,
         dobDay,
         dobYear,
-        password,
-        securityText,
       });
     }
   };
@@ -208,8 +202,6 @@ const SignUp: React.FC = () => {
     dobMonth: string;
     dobDay: string;
     dobYear: string;
-    password: string;
-    securityText: string;
   }) => {
     console.log("Username:", data.username);
     console.log("Email:", data.email);
@@ -219,8 +211,6 @@ const SignUp: React.FC = () => {
       "Date of Birth:",
       `${data.dobMonth}/${data.dobDay}/${data.dobYear}`,
     );
-    console.log("Password:", data.password);
-    console.log("Security Text:", data.securityText);
   };
 
   return (
