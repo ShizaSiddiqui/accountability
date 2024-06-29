@@ -1,4 +1,4 @@
-node_modules/
-build/
-.yml
-.svg
+node_modules
+build
+dist
+*.config.js

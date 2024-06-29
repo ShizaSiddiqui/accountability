@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const generateCaptchaText = () => {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let captchaText = '';
+  const chars =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let captchaText = "";
   for (let i = 0; i < 6; i++) {
     captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return captchaText;
 };
 
-const DummyCaptcha: React.FC<{ onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }> = ({ onChange }) => {
+const DummyCaptcha: React.FC<{
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}> = ({ onChange }) => {
   const [captchaText, setCaptchaText] = useState(generateCaptchaText());
 
   const refreshCaptcha = () => {
@@ -25,7 +28,13 @@ const DummyCaptcha: React.FC<{ onChange: (e: React.ChangeEvent<HTMLInputElement>
         onChange={onChange}
         className="captcha-input"
       />
-      <button type="button" onClick={refreshCaptcha} className="refresh-captcha">↻</button>
+      <button
+        type="button"
+        onClick={refreshCaptcha}
+        className="refresh-captcha"
+      >
+        ↻
+      </button>
     </div>
   );
 };

@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../../styles/global.css';
-import DummyCaptcha from '../../components/DummyCaptcha';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/global.css";
+import DummyCaptcha from "../../components/DummyCaptcha";
 
 interface LoginFormProps {
-  onSubmit: (data: { username: string; password: string; securityText: string }) => void;
+  onSubmit: (data: {
+    username: string;
+    password: string;
+    securityText: string;
+  }) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [securityText, setSecurityText] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [securityText, setSecurityText] = useState("");
   const [usernameError, setUsernameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
-  const [securityTextError, setSecurityTextError] = useState<string | null>(null);
+  const [securityTextError, setSecurityTextError] = useState<string | null>(
+    null,
+  );
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -34,18 +40,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
     e.preventDefault();
     let isValid = true;
 
-    if (username.trim() === '') {
-      setUsernameError('Username is required');
+    if (username.trim() === "") {
+      setUsernameError("Username is required");
       isValid = false;
     }
 
-    if (password.trim() === '') {
-      setPasswordError('Password is required');
+    if (password.trim() === "") {
+      setPasswordError("Password is required");
       isValid = false;
     }
 
-    if (securityText.trim() === '') {
-      setSecurityTextError('Security Text is required');
+    if (securityText.trim() === "") {
+      setSecurityTextError("Security Text is required");
       isValid = false;
     }
 
@@ -95,11 +101,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
 };
 
 const Login: React.FC = () => {
-  const handleSubmit = (data: { username: string; password: string; securityText: string }) => {
-    // Handle form submission, e.g., sending data to a server.
-    console.log('Username:', data.username);
-    console.log('Password:', data.password);
-    console.log('Security Text:', data.securityText);
+  const handleSubmit = (data: {
+    username: string;
+    password: string;
+    securityText: string;
+  }) => {
+    console.log("Username:", data.username);
+    console.log("Password:", data.password);
+    console.log("Security Text:", data.securityText);
   };
 
   return (
@@ -111,8 +120,12 @@ const Login: React.FC = () => {
         </div>
         <LoginForm onSubmit={handleSubmit} />
         <div className="login-footer">
-          <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link>
-          <p>Don't have an account? <Link to="/sign-up">Sign Up</Link></p>
+          <Link to="/forgot-password" className="forgot-password">
+            Forgot Password?
+          </Link>
+          <p>
+            Don't have an account? <Link to="/sign-up">Sign Up</Link>
+          </p>
         </div>
       </div>
     </div>

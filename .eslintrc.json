@@ -4,10 +4,11 @@
   },
   "extends": "react-app",
   "rules": {
-    "indent": "off"
+    "indent": ["error", 2], // 2 spaces for indentation
+    "no-unused-vars": "error", // unused variables
+    "no-unused-expressions": "error", // unused expressions
+    "no-unused-labels": "error" // unused labels
   },
-  
-    "plugins": [
-      "react"
-    ]
-  }
+
+  "plugins": ["react"]
+}
