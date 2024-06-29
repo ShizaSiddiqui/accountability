@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../styles/global.css'; 
-import DummyCaptcha from '../../components/DummyCaptcha'; 
+import '../../styles/global.css';
+import DummyCaptcha from '../../components/DummyCaptcha';
 
 interface LoginFormProps {
   onSubmit: (data: { username: string; password: string; securityText: string }) => void;
@@ -11,27 +11,47 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [securityText, setSecurityText] = useState('');
-  const [error, setError] = useState(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [securityTextError, setSecurityTextError] = useState<string | null>(null);
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
+    setUsernameError(null);
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+    setPasswordError(null);
   };
 
   const handleSecurityTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSecurityText(e.target.value);
+    setSecurityTextError(null);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
+    let isValid = true;
+
+    if (username.trim() === '') {
+      setUsernameError('Username is required');
+      isValid = false;
+    }
+
+    if (password.trim() === '') {
+      setPasswordError('Password is required');
+      isValid = false;
+    }
+
+    if (securityText.trim() === '') {
+      setSecurityTextError('Security Text is required');
+      isValid = false;
+    }
+
+    if (isValid) {
       onSubmit({ username, password, securityText });
-    } catch (error: any) {
-        setError(error.toString());
-      }
+    }
   };
 
   return (
@@ -45,6 +65,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
           placeholder="hammad.khawaja@31g.co.uk"
           aria-label="Username"
         />
+        {usernameError && <div className="error">{usernameError}</div>}
       </label>
       <label>
         Password
@@ -55,14 +76,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
           placeholder="Password123@"
           aria-label="Password"
         />
+        {passwordError && <div className="error">{passwordError}</div>}
       </label>
       <label>
         Security Text
         <DummyCaptcha onChange={handleSecurityTextChange} />
+        {securityTextError && <div className="error">{securityTextError}</div>}
       </label>
-
-      {error && <div className="error">{error}</div>}
-
       <label>
         <div className="checkbox-wrapper">
           <input type="checkbox" className="checkbox" />
@@ -76,7 +96,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
 
 const Login: React.FC = () => {
   const handleSubmit = (data: { username: string; password: string; securityText: string }) => {
-    // Here you'd typically handle form submission, e.g., sending data to a server.
+    // Handle form submission, e.g., sending data to a server.
     console.log('Username:', data.username);
     console.log('Password:', data.password);
     console.log('Security Text:', data.securityText);
@@ -95,7 +115,7 @@ const Login: React.FC = () => {
           <p>Don't have an account? <Link to="/sign-up">Sign Up</Link></p>
         </div>
       </div>
-   </div>
+    </div>
   );
 };
 
